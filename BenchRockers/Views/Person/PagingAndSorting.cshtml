@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+
+    ViewBag.Title = "PagingAndSorting";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JtableTest</title>
+    <link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  
+    <script src="~/Scripts/jtable/jquery.jtable.js"></script>
+</head>
+<body>
+    <div id="PersonTableContainer"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            alert("ganesh");
+        });
+
+        $(document).ready(function () {
+
+            $('#PersonTableContainer').jtable({
+                title: 'Person List',
+                paging: true, //Enable paging
+                pageSize: 2, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'Name ASC', //Set default sorting
+                actions: {
+                    listAction: '@Url.Action("PersonList")',
+             deleteAction: '@Url.Action("DeleteStudent")',
+             updateAction: '@Url.Action("UpdateStudent")',
+             createAction: '@Url.Action("CreateStudent")'
+         },
+                fields: {
+                    PersonId: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    Name: {
+                        title: 'Name',
+                        width: '23%'
+                    },
+                    EmailAddress: {
+                        title: 'Email address',
+                        list: false
+                    },
+
+                    Gender: {
+                        title: 'Gender',
+                        width: '13%',
+                        options: { 'M': 'Male', 'F': 'Female' }
+                    }
+
+                }
+     });
+
+        //Load student list from server
+            $('#PersonTableContainer').jtable('load');
+    });
+
+   </script>
+</body>
+</html>
